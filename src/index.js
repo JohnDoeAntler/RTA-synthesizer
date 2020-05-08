@@ -147,7 +147,7 @@ app.post('/notify', async (req, res) => {
 			// ─── SEPARATE THE DRIVING VIDEO TO VIDEO AND AUDIO ───────────────
 			//
 
-			await new Promise((res, req) => {
+			await new Promise((res, rej) => {
 				ffmpeg(des)
 					.withNoAudio()
 					.saveToFile(`${config.progresses_path}/${progress.id}/ground.mp4`)
@@ -214,7 +214,7 @@ app.post('/merge', async (req, res) => {
 
 	if (fs.existsSync(`${config.progresses_path}/${id}/fake.mp4`)&& fs.existsSync(`${config.progresses_path}/${id}/fake.mp3`)) {
 
-		await new Promise((res, req) => {
+		await new Promise((res, rej) => {
 			ffmpeg(`${config.progresses_path}/${id}/fake.mp4`)
 			.addInput(`${config.progresses_path}/${id}/fake.mp3`)
 			.saveToFile(`${config.progresses_path}/${id}/result.mp4`)
