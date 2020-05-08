@@ -155,6 +155,8 @@ app.post('/notify', async (req, res) => {
 					.on("error", (err) => rej(err));
 			}).then(() => {
 				console.log("video from driving video has been extracted.")
+			}).then(() => {
+				console.log("there is an error while extracting the video");
 			});
 
 			await new Promise((res, rej) => {
@@ -165,6 +167,8 @@ app.post('/notify', async (req, res) => {
 					.on("error", (err) => rej(err));
 			}).then(() => {
 				console.log("audio from driving video has been extracted.")
+			}).catch(() => {
+				console.log("there is an error while extracting the video");
 			});
 
 			//
@@ -236,8 +240,9 @@ app.post('/merge', async (req, res) => {
 			}).then(x => {
 				console.log(`successfully update progress ${id} resultUrl.`);
 			});
+		}).catch(() => {
+			console.log(`there is an error of merging the progress ${id}.`);
 		});
-
 	} else {
 		console.log(`progress ${id} is not ready to merge.`);
 	}
